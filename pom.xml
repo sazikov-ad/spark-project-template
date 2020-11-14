@@ -17,6 +17,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <resources.filter.delimiter>@{*}</resources.filter.delimiter>
 
     <compiler.java.version>1.8</compiler.java.version>
     <compiler.scala.version>2.12.12</compiler.scala.version>
@@ -146,6 +147,13 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>${maven-resources-plugin.version}</version>
+          <configuration>
+            <delimiters>
+              <!--Avoid interfering with Shell environment variables - use non-default delimiter-->
+              <delimiter>${resources.filter.delimiter}</delimiter>
+            </delimiters>
+            <useDefaultDelimiters>false</useDefaultDelimiters>
+          </configuration>
         </plugin>
 
         <plugin>
@@ -158,6 +166,12 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
           <version>${maven-assembly-plugin.version}</version>
+          <configuration>
+            <appendAssemblyId>false</appendAssemblyId>
+            <delimiters>
+              <delimiter>${resources.filter.delimiter}</delimiter>
+            </delimiters>
+          </configuration>
         </plugin>
 
         <plugin>
