@@ -20,6 +20,8 @@
     <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
     <scalatest-maven-plugin.version>2.0.2</scalatest-maven-plugin.version>
     <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
     <spark.version>2.4.5</spark.version>
     <scalatest.version>3.2.3</scalatest.version>
@@ -38,14 +40,24 @@
         <version>${compiler.scala.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_${compiler.scala.compat.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.scalatest</groupId>
         <artifactId>scalatest-core_${compiler.scala.compat.version}</artifactId>
         <version>${scalatest.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-sql_${compiler.scala.compat.version}</artifactId>
-        <version>${spark.version}</version>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest-flatspec_${compiler.scala.compat.version}</artifactId>
+        <version>${scalatest.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest-shouldmatchers_${compiler.scala.compat.version}</artifactId>
+        <version>${scalatest.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -64,6 +76,16 @@
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest-core_${compiler.scala.compat.version}</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest-flatspec_${compiler.scala.compat.version}</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest-shouldmatchers_${compiler.scala.compat.version}</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -105,6 +127,29 @@
         </plugin>
 
         <plugin>
+          <groupId>org.scalatest</groupId>
+          <artifactId>scalatest-maven-plugin</artifactId>
+          <version>${scalatest-maven-plugin.version}</version>
+          <configuration>
+            <parallel>false</parallel>
+            <junitxml>.</junitxml>
+            <filereports>WDF TestSuite.txt</filereports>
+            <testFailureIgnore>false</testFailureIgnore>
+            <systemProperties>
+              <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
+              <log4j.configuration>log4j-unit-tests.xml</log4j.configuration>
+            </systemProperties>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.scalatest</groupId>
+              <artifactId>scalatest_${compiler.scala.compat.version}</artifactId>
+              <version>${scalatest.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
           <version>${maven-shade-plugin.version}</version>
@@ -122,6 +167,18 @@
               </filter>
             </filters>
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.2</version>
         </plugin>
 
       </plugins>
@@ -162,6 +219,19 @@
       </plugin>
 
       <plugin>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>test-scala</id>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>
@@ -170,6 +240,43 @@
               <goal>shade</goal>
             </goals>
             <phase>package</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <!--No Java code - disable Java compilation-->
+          <execution>
+            <id>default-compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <!--No Java code - disable Java tests-->
+          <execution>
+            <id>default-test</id>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <phase>none</phase>
           </execution>
         </executions>
       </plugin>
