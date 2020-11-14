@@ -204,17 +204,6 @@
             </goals>
             <phase>test-compile</phase>
           </execution>
-          <execution>
-            <id>generate-apidoc</id>
-            <goals>
-              <goal>doc-jar</goal>
-            </goals>
-            <configuration>
-              <args>
-                <arg>-no-link-warnings</arg>
-              </args>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
 
