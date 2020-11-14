@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.hse.bigdata</groupId>
-  <artifactId>spark-project-template</artifactId>
+  <artifactId>spark-project-template-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Spark Project Template</name>
@@ -12,6 +12,7 @@
 
   <modules>
     <module>dummy-spark-app</module>
+    <module>spark-project-template</module>
   </modules>
 
   <properties>
@@ -24,6 +25,9 @@
     <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
     <scalatest-maven-plugin.version>2.0.2</scalatest-maven-plugin.version>
     <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
+    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+    <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
+    <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
@@ -136,6 +140,24 @@
               </filter>
             </filters>
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-plugin.version}</version>
         </plugin>
 
         <plugin>
