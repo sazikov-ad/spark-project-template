@@ -1,11 +1,34 @@
 #!/usr/bin/env bash
 
-# TODO log config
-# TODO Spark config - via file
-# TODO fat jar is in lib/
+set -o nounset
+set -o errexit
+set -o pipefail
+
+bin_dir=
+if echo "$0" | grep -q /
+then
+  # Started with absolute or relative path
+  bin_dir="$(cd "$(dirname -- "$0")" ; pwd)"
+else
+  # Started from PATH
+  bin_dir="$(cd "$(dirname -- "$(command -v "$0")")" ; pwd)"
+fi
+base_dir="$(dirname -- "$bin_dir")"
+lib_dir="$base_dir/lib"
+conf_dir="$base_dir/conf"
+
+spark_conf_file="$conf_dir/spark.conf"
+log_conf_file_name="log4j.xml"
+log_conf_file="$conf_dir/$log_conf_file_name"
+
 spark2-submit \
+  -v \
+  --properties-file "$spark_conf_file" \
   --master yarn \
   --deploy-mode cluster \
+  --files "$log_conf_file" \
+  --driver-java-options "-Dlog4j.configuration=$log_conf_file_name" \
+  --conf spark.executor.extraJavaOptions="-Dlog4j.configuration=$log_conf_file_name" \
   --name Dummy \
   --class org.fivt.atp.bigdata.DummyMain \
-  @{project.artifactId}-@{project.version}.jar
+  "$lib_dir/dummy-spark-app-@{project.version}.jar"
