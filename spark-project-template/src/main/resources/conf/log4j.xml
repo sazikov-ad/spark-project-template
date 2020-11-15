@@ -14,7 +14,7 @@
     <level value="WARN"/>
   </logger>
 
-  <logger name="org.sparkproject">
+  <logger name="org.spark_project">
     <level value="WARN"/>
   </logger>
 
