@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>ru.hse.bigdata</groupId>
+    <groupId>org.fivt.atp.bigdata</groupId>
     <artifactId>spark-project-template-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
