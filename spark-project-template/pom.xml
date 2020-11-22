@@ -20,7 +20,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>dummy-spark-app</artifactId>
+      <artifactId>spark-project-template-apps</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

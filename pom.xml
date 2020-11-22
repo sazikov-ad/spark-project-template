@@ -11,7 +11,7 @@
   <description>Template project to start working with Apache Spark using Scala and Maven</description>
 
   <modules>
-    <module>dummy-spark-app</module>
+    <module>spark-project-template-apps</module>
     <module>spark-project-template</module>
   </modules>
 

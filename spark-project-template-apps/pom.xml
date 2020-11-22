@@ -8,10 +8,10 @@
     <artifactId>spark-project-template-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>dummy-spark-app</artifactId>
+  <artifactId>spark-project-template-apps</artifactId>
   <packaging>jar</packaging>
-  <name>Dummy Spark Application</name>
-  <description>Dummy application to illustrate Spark usage</description>
+  <name>Spark Applications</name>
+  <description>Applications to be implemented</description>
 
   <dependencies>
     <dependency>
