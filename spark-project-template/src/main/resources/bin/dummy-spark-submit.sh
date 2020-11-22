@@ -30,5 +30,5 @@ spark2-submit \
   --driver-java-options "-Dlog4j.configuration=$log_conf_file_name" \
   --conf spark.executor.extraJavaOptions="-Dlog4j.configuration=$log_conf_file_name" \
   --name Dummy \
-  --class org.fivt.atp.bigdata.DummyMain \
-  "$lib_dir/dummy-spark-app-@{project.version}.jar"
+  --class org.fivt.atp.bigdata.dummy.DummyMain \
+  "$lib_dir/spark-project-template-apps-@{project.version}.jar"
