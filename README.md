@@ -6,7 +6,8 @@ and using [Apache Spark](https://spark.apache.org/) framework.
 The project uses [Maven](https://maven.apache.org/) as a build tool.
 The Spark application runs in YARN.
 
-The `dummy-spark-app` sub-module contains a dummy Scala application `DummyMain`.
+The `spark-project-template-apps` sub-module contains Spark applications.
+Initially there is only a dummy Scala application `DummyMain`.
 There is also a dummy unit test.
 
 The `spark-project-template` sub-module packages the distribution archive.
