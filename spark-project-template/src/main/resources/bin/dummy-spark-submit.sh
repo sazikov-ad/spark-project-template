@@ -21,6 +21,10 @@ spark_conf_file="$conf_dir/spark.conf"
 log_conf_file_name="log4j.xml"
 log_conf_file="$conf_dir/$log_conf_file_name"
 
+# Cloudera distribution by default sets SPARK_KAFKA_VERSION to 0.9
+# This leads to incorrect Kafka libs in classpath.
+export SPARK_KAFKA_VERSION='0.10'
+
 spark2-submit \
   -v \
   --properties-file "$spark_conf_file" \
