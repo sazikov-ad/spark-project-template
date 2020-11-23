@@ -13,6 +13,8 @@ There is also a dummy unit test.
 The `spark-project-template` sub-module packages the distribution archive.
 It also provides default configuration files and the application launcher.
 
+See [PREREQUISITES](PREREQUISITES.md) for the required software and configuration.
+
 ## Build, run unit tests, package
 
 Run a Maven command:
@@ -43,19 +45,6 @@ spark-project-template/target/spark-project-template-<version>.zip
    test -d spark-project-template && rm -r spark-project-template ; unzip spark-project-template-<version>.zip
    ```
 
-1. Make sure that `spark2-submit` is in your PATH:
-   ```shell script
-   command -v spark2-submit
-   ```
-
-1. Make sure the `HADOOP_CONF_DIR` environment variable
-   points to the directory with Hadoop configuration files:
-   ```shell script
-   echo $HADOOP_CONF_DIR
-   ```
-   The output should look like `/etc/hadoop/conf`.
-   Consult with the administrator of your Hadoop cluster for the correct path.
-   
 1. Run the application:
    ```shell script
    ./spark-project-template/bin/dummy-spark-submit.sh

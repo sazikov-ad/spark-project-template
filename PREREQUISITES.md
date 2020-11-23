@@ -62,7 +62,7 @@ points to the directory with Hadoop configuration files:
 echo $HADOOP_CONF_DIR
 ```
 The output should look like `/etc/hadoop/conf`.
-
+Consult with the administrator of your Hadoop cluster for the correct path.
 Declare `HADOOP_CONF_DIR` in your `.bashrc` if you don't have it yet:
 
 ```shell script
